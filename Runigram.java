@@ -10,17 +10,18 @@ public class Runigram {
 		//// Hide / change / add to the testing code below, as needed.
 		
 		// Tests the reading and printing of an image:	
-		Color[][] tinypic = read("tinypic.ppm");
+		Color[][] tinypic = read("ironman.ppm");
 		//print(tinypic);
-		print(tinypic[0][0]);
+		//System.out.println();
+		//print(grayScaled(tinypic));
 		// Creates an image which will be the result of various 
 		// image processing operations:
-		//Color[][] imageOut;
+		Color[][] imageOut;
 
 		// Tests the horizontal flipping of an image:
-		//imageOut = flippedHorizontally(tinypic);
-		//System.out.println();
-		//print(imageOut);
+		imageOut = flippedHorizontally(tinypic);
+		System.out.println();
+		print(imageOut);
 		
 		//// Write here whatever code you need in order to test your work.
 		//// You can reuse / overide the contents of the imageOut array.
@@ -65,11 +66,11 @@ public class Runigram {
 	// we can apply the function and then use this function to print the resulting image.
 	private static void print(Color[][] image) {
 		for (int i = 0; i < image.length; i++ ){
-			System.out.println();
 			for (int j = 0; j < image[0].length; j++){
 				print(image[i][j]);
 				System.out.print(" ");
 			}
+			System.out.println();
 		}
 	}
 	
@@ -77,39 +78,52 @@ public class Runigram {
 	 * Returns an image which is the horizontally flipped version of the given image. 
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-		int columns = image[0].length;
 		int rows = image.length;
-		Color[][] flippedImage = new Color[columns][rows];
-		for (int r = 0; r< rows; r++){
-			for (int c = 0; c< columns; c++){
-				flippedImage[columns-(c+1)][r] = image[r][c];
+        int cols = image[0].length;
+        Color[][] flippedArray = new Color[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                flippedArray[i][j] = image[i][cols - 1 - j];
 			}
-		}
-		return flippedImage;
+	}
+	return flippedArray;
 	}
 	
 	/**
 	 * Returns an image which is the vertically flipped version of the given image. 
 	 */
 	public static Color[][] flippedVertically(Color[][] image){
-		//// Replace the following statement with your code
-		return null;
+		int row = image.length;
+        int col = image[0].length;
+        Color[][] VerticalArray = new Color[row][col];
+		for(int i = 0; i< col; i++){
+			for (int j = 0; j< row; j++){
+				VerticalArray[i][j] = image[row-1-i][j];
+			}
+		}
+		return VerticalArray;	
 	}
 	
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
 	public static Color luminance(Color pixel) {
-		//// Replace the following statement with your code
-		return null;
+		int lumValue = (int)(pixel.getRed()*0.299 + pixel.getGreen()*0.587 + pixel.getBlue()*0.114);
+		Color newPix = new Color (lumValue,lumValue,lumValue);
+		return newPix;
 	}
 	
 	/**
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
 	public static Color[][] grayScaled(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		Color [][] newImage = new Color[image.length][image[0].length];
+		for(int i = 0; i< image.length; i++){
+			for (int j = 0; j <image[0].length; j++){
+				newImage[i][j] = luminance(image[i][j]);
+			}
+		}
+		return newImage;
 	}	
 	
 	/**
@@ -182,5 +196,6 @@ public class Runigram {
 		}
 		StdDraw.show();
 	}
+	
 }
 
