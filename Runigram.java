@@ -10,17 +10,17 @@ public class Runigram {
 		//// Hide / change / add to the testing code below, as needed.
 		
 		// Tests the reading and printing of an image:	
-		Color[][] tinypic = read("tinypic.ppm");
-		print(tinypic);
-
+		Color[][] tinypic = read("thor.ppm");
+		//print(tinypic);
+		print(tinypic);;
 		// Creates an image which will be the result of various 
 		// image processing operations:
-		Color[][] imageOut;
+		//Color[][] imageOut;
 
 		// Tests the horizontal flipping of an image:
-		imageOut = flippedHorizontally(tinypic);
-		System.out.println();
-		print(imageOut);
+		//imageOut = flippedHorizontally(tinypic);
+		//System.out.println();
+		//print(imageOut);
 		
 		//// Write here whatever code you need in order to test your work.
 		//// You can reuse / overide the contents of the imageOut array.
@@ -41,8 +41,12 @@ public class Runigram {
 		// For each pixel (i,j), reads 3 values from the file,
 		// creates from the 3 colors a new Color object, and 
 		// makes pixel (i,j) refer to that object.
-		//// Replace the following statement with your code.
-		return null;
+		for (int i = 0; i<numRows; i++){
+			for (int j = 0; j < numCols; j++){
+				image[i][j] = new Color(in.readInt(),in.readInt(),in.readInt());
+			}
+		}
+		return image;
 	}
 
     // Prints the RGB values of a given color.
@@ -60,15 +64,28 @@ public class Runigram {
 	// For example, to check that some image processing function works correctly,
 	// we can apply the function and then use this function to print the resulting image.
 	private static void print(Color[][] image) {
-		//// Replace this comment with your code
+		for (int i = 0; i < image.length; i++ ){
+			System.out.println();
+			for (int j = 0; j < image[0].length; j++){
+				print(image[i][j]);
+				System.out.print(" ");
+			}
+		}
 	}
 	
 	/**
 	 * Returns an image which is the horizontally flipped version of the given image. 
 	 */
 	public static Color[][] flippedHorizontally(Color[][] image) {
-		//// Replace the following statement with your code
-		return null;
+		int columns = image[0].length;
+		int rows = image.length;
+		Color[][] flippedImage = new Color[columns][rows];
+		for (int r = 0; r< rows; r++){
+			for (int c = 0; c< columns; c++){
+				flippedImage[columns-(c+1)][r] = image[r][c];
+			}
+		}
+		return flippedImage;
 	}
 	
 	/**
