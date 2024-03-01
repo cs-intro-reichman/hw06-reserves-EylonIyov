@@ -10,9 +10,9 @@ public class Runigram {
 		//// Hide / change / add to the testing code below, as needed.
 		
 		// Tests the reading and printing of an image:	
-		Color[][] tinypic = read("thor.ppm");
+		Color[][] tinypic = read("tinypic.ppm");
 		//print(tinypic);
-		print(tinypic);;
+		print(tinypic[0][0]);
 		// Creates an image which will be the result of various 
 		// image processing operations:
 		//Color[][] imageOut;
